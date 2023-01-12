@@ -1,1 +1,123 @@
 
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header, footer {
+    width: 100%;
+    height: 15vh;
+    border: 1px solid black;
+    background: black;
+    color: white;
+}
+
+main {
+    width: 100%;
+    height: 100vh;
+}
+
+aside {
+    border: 1px solid black;
+}
+
+header {
+    display: grid;
+    grid-template-columns: 10% 1fr 10%;
+    justify-items: end;
+    align-items: center;
+}
+
+/* Outra maneira para atingir o mesmo resultado:
+
+body {
+    display: grid;
+    grid-template-rows: 15vh 70vh 15vh;
+    justify-content: space-between;
+} */
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 2.5fr 1fr; /* Também posso usar números quebrados. Aléem disso essa outra main está sobrescrevendo a main anterior que escrevi nesse mesmo código, vários bugs podem acontecer por causa disso. */
+}
+
+/* Exercício de Fixação:
+
+Utilizando o site do exercício anterior, implemente na sua página: 
+  - Faça com que esses cards quebrem a linha caso falte espaço disponível
+  - É obrigatório estarem num container com display grid */ 
+
+
+ Existe essa forma de fazer: 
+
+.content-container article {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 30% 70%;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0 2rem;
+    column-span: 2;
+}
+
+/* E essa outra forma: 
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr 2fr 1fr;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 10px;
+    text-align: center;
+    margin: 20px;
+}*/
+
+------------------------------------------------------------------
+
+/* - grid-template-rows: Define a quantidade e tamanho das linhas;
+- grid-template-columns: Define a quantidade e tamanho das colunas;j
+- grid-template: Versão resumida, que combina as duas propriedades anteriores;
+
+Nesse momento é importante pensar em unidades de medida que ajudem a organizar o tamanho do grid desde o início. Podemos usar pixels, vw, e outras medidas que já vimos. No entanto, o grid tem uma medida muito interessante, pensada apenas para ele: o `fr`. fr representa uma fração do espaço restante. Primeiro os espaços com medidas fixas são definidos, e o que sobrar vai pro fr 
+
+O container do exemplo tem 500px x 500px. Sabendo disso, vamos entender o processo, começando pelas propriedades de template grid do contêiner:
+
+Vamos primeiro entender a divisão das linhas. 
+
+- 500px estão divididos em 4 partes (ou frações). A primeira linha ocupa 2fr, e cada uma das outras linhas ocupa 1fr. 500px/4 = 125px por fração
+- Linha 1: 250px, pois são 2fr
+- Linhas 2 e 3: 125px
+
+Agora as colunas:
+
+- Temos 500px, e uma das colunas está com valor em pixels. Primeiro resolvemos esta coluna, para dividir o restante em frações. Então 500-100=400px restantes;
+- Agora temos 400px para dividir entre 2 partes. 400/2 = 200px cada fr
+- Colunas 1 e 2: 200px (1fr)
+- Coluna 3: 100px (fixo)
+
+💡 Não precisa se preocupar muito com as contas! Vá acompanhando o resultado na tela ao fazer, e alterando quando necessário 
+
+um resumão de tudo que foi passado até aqui:
+
+- Use `display: grid;` para criar um grid.
+- Use `grid-template` para definir quantas colunas e linhas existirão, e quais serão seus tamanhos.
+- Use `fr` para usar **frações** de tamanho do grid, para dividir os espaços igualmente.
+- Use `justify-items` para definir o alinhamento das linhas.
+- Use `align-items` para definir o alinhamento das colunas.
+- Use `grid-gap` para criar espaços entre os itens do contêiner
+- Use `justify-self` para alinhar elementos individuais no eixo das linhas.
+- Use `align-self` para alinhar elementos individuais no eixo das colunas.
+- Use `grid-row` e `grid-column` para definir tamanhos personalizados dentro de um grid existente.
+
+Novamente, lembre-se que tudo isso são formas de dizer para o navegador como ele deve exibir elementos HTML. A parte mais complicada vem antes de escrever, é a parte de entender, conceitualmente, o layout da página, e os comportamentos que devem ser definidos para a disposição dos itens.
+
+Quando um time de design te entregar um *mock* de como a página deve ficar, sua primeira tarefa deve ser desenhar um monte de caixinhas, e pensar em como elas devem se tocar, se empilhar, esticar, encolher etc. Com isso feito, aí sim devemos usar as técnicas aprendidas neste documento.
+
+Além disso, lembre-se que Grid e Flex não são **competidores**, e sim **complementares**. Nós podemos usar ambos ao mesmo tempo em nossos projetos!*/
